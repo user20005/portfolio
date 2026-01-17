@@ -1,7 +1,7 @@
 export interface Skill {
   name: string;
-  level: number; 
-  icon?: string;
+  level: number;
+  icon?: string; 
 }
 
 export const webSkills: Skill[] = [

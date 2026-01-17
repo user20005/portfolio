@@ -9,7 +9,6 @@ export async function generateStaticParams() {
   }));
 }
 
-
 const getSkillLevel = (name: string) => {
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
@@ -17,7 +16,6 @@ const getSkillLevel = (name: string) => {
   }
   return 75 + (Math.abs(hash) % 5) * 5;
 };
-
 
 // 2. Le Composant de la Page
 export default async function ProjectPage(props: { params: Promise<{ id: string }> }) {
@@ -40,11 +38,17 @@ export default async function ProjectPage(props: { params: Promise<{ id: string 
     );
   }
 
+  // Couleurs dynamiques
+  const isWeb = project.category === 'WEB';
+  const accentColor = isWeb ? 'bg-cyan-500' : 'bg-amber-500';
+  const textColor = isWeb ? 'text-cyan-400' : 'text-amber-400';
+  const borderColor = isWeb ? 'hover:border-cyan-500/30' : 'hover:border-amber-500/30';
+
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-gray-200 selection:bg-cyan-500/30 pb-20">
+    <main className="min-h-screen bg-[#0a0a0a] text-gray-200 selection:bg-cyan-500/30 pb-20 overflow-x-hidden [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-orange-600/100 scroll-smooth no-scrollbar">
       <Navbar />
 
-      <div className="max-w-4xl mx-auto px-6 pt-32">
+      <div className="max-w-6xl mx-auto px-6 pt-32">
         
         {/* BOUTON RETOUR */}
         <Link href="/#projects" className="inline-flex items-center text-sm text-gray-400 hover:text-white transition-colors mb-8 group">
@@ -52,7 +56,7 @@ export default async function ProjectPage(props: { params: Promise<{ id: string 
           Retour au portfolio
         </Link>
 
-        {/* TITRE & TAGS */}
+        {/* HEADER COMPACT */}
         <div className="border-b border-white/10 pb-8 mb-12">
           <span className="text-amber-500 font-mono text-sm tracking-wider uppercase mb-3 block">
             {project.context}
@@ -69,7 +73,7 @@ export default async function ProjectPage(props: { params: Promise<{ id: string 
           </div>
         </div>
 
-        {/* IMAGE PRINCIPALE */}
+        {/* IMAGE PRINCIPALE DU PROJET (Celle-ci reste car c'est la couverture) */}
         <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-16 border border-white/10 bg-[#111] shadow-2xl">
            {!project.image ? (
              <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-amber-900/40" />
@@ -79,7 +83,6 @@ export default async function ProjectPage(props: { params: Promise<{ id: string 
                style={{ backgroundImage: `url(${project.image})` }} 
              />
            )}
-           
            <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 md:p-10 flex items-end">
              <p className="text-white/90 text-lg font-medium max-w-2xl leading-relaxed">
                {project.description}
@@ -87,12 +90,13 @@ export default async function ProjectPage(props: { params: Promise<{ id: string 
            </div>
         </div>
 
-        {/* CONTENU (GRID) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        {/* CONTENU PRINCIPAL */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
-          {/* GAUCHE : TEXTES */}
-          <div className="md:col-span-2 space-y-12">
+          {/* COLONNE GAUCHE (8 colonnes) */}
+          <div className="lg:col-span-8 space-y-16">
             
+            {/* 1. CONTEXTE */}
             <section>
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                 <span className="w-1 h-8 bg-blue-500 rounded-full"></span>
@@ -103,6 +107,46 @@ export default async function ProjectPage(props: { params: Promise<{ id: string 
               </div>
             </section>
 
+            {/* 2. TIMELINE HORIZONTALE (TEXTE SEULEMENT) */}
+            {project.progression && project.progression.length > 0 && (
+              <section className="relative">
+                <h2 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                  <span className="w-1 h-8 bg-purple-500 rounded-full"></span>
+                  Étapes de réalisation
+                </h2>
+                
+                {/* Ligne connectrice d'arrière-plan */}
+                <div className="absolute top-[28px] left-0 w-full h-0.5 bg-white/10 hidden md:block"></div>
+
+                {/* Conteneur Scroll Horizontal */}
+                <div className="flex overflow-x-auto pb-8 gap-6 snap-x [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-amber-600 scroll-smooth no-scrollbar">
+                  {project.progression.map((step, i) => (
+                    <div key={i} className="min-w-[260px] md:min-w-[300px] snap-center flex flex-col relative group">
+                      
+                      {/* Numéro de l'étape (Bulle) */}
+                      <div className={`w-14 h-14 rounded-full ${accentColor} text-black font-bold text-xl flex items-center justify-center mb-6 relative z-10 shadow-[0_0_15px_rgba(0,0,0,0.5)] group-hover:scale-110 transition-transform`}>
+                        {i + 1}
+                      </div>
+
+                      {/* Carte Purement Textuelle */}
+                      <div className={`flex-1 bg-[#111] border border-white/10 rounded-2xl p-6 transition-all duration-300 ${borderColor} hover:bg-white/5 flex flex-col`}>
+                        <div className={`text-xs font-mono font-bold mb-3 opacity-60 uppercase tracking-widest ${textColor}`}>
+                          Étapes {i + 1}
+                        </div>
+                        <h3 className="text-lg font-bold text-white mb-3 leading-tight">
+                          {step.title}
+                        </h3>
+                        <p className="text-sm text-gray-400 leading-relaxed">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* 3. BILAN */}
             <section>
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                 <span className="w-1 h-8 bg-green-500 rounded-full"></span>
@@ -114,66 +158,70 @@ export default async function ProjectPage(props: { params: Promise<{ id: string 
                 <span className="text-4xl absolute bottom-[-10px] right-4 text-green-500/20">”</span>
               </div>
             </section>
-          </div>
-
-          {/* DROITE : SKILLS (AVEC BARRES DE PROGRESSION) */}
-          <div className="space-y-8">
-            
-            {/* HARD SKILLS */}
-            <div className="bg-[#111] p-6 rounded-2xl border border-white/10">
-              <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_10px_#f59e0b]"></span>
-                Hard Skills
-              </h3>
-              <div className="space-y-5">
-                {project.details.hardSkills.map((skill, i) => {
-                  const level = getSkillLevel(skill); // Calcul du niveau auto
-                  return (
-                    <div key={i} className="group">
-                      <div className="flex justify-between mb-1.5">
-                        <span className="text-sm font-medium text-gray-300">{skill}</span>
-                        <span className="text-xs text-amber-500/70 font-mono">{level}%</span>
-                      </div>
-                      <div className="w-full bg-white/5 rounded-full h-2">
-                        <div 
-                          className="bg-amber-500 h-2 rounded-full transition-all duration-1000 ease-out group-hover:shadow-[0_0_10px_rgba(245,158,11,0.5)]" 
-                          style={{ width: `${level}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* SOFT SKILLS */}
-            <div className="bg-[#111] p-6 rounded-2xl border border-white/10">
-              <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_10px_#06b6d4]"></span>
-                Soft Skills
-              </h3>
-              <div className="space-y-5">
-                {project.details.softSkills.map((skill, i) => {
-                  const level = getSkillLevel(skill);
-                  return (
-                    <div key={i} className="group">
-                      <div className="flex justify-between mb-1.5">
-                        <span className="text-sm font-medium text-gray-300">{skill}</span>
-                        <span className="text-xs text-cyan-500/70 font-mono">{level}%</span>
-                      </div>
-                      <div className="w-full bg-white/5 rounded-full h-2">
-                        <div 
-                          className="bg-cyan-500 h-2 rounded-full transition-all duration-1000 ease-out group-hover:shadow-[0_0_10px_rgba(6,182,212,0.5)]" 
-                          style={{ width: `${level}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
 
           </div>
+
+          {/* COLONNE DROITE (4 colonnes) - Sticky */}
+          <div className="lg:col-span-4 relative">
+            <div className="sticky top-32 space-y-8">
+              
+              {/* HARD SKILLS */}
+              <div className="bg-[#111] p-6 rounded-2xl border border-white/10">
+                <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_10px_#f59e0b]"></span>
+                  Hard Skills
+                </h3>
+                <div className="space-y-5">
+                  {project.details.hardSkills.map((skill, i) => {
+                    const level = getSkillLevel(skill);
+                    return (
+                      <div key={i} className="group">
+                        <div className="flex justify-between mb-1.5">
+                          <span className="text-sm font-medium text-gray-300">{skill}</span>
+                          <span className="text-xs text-amber-500/70 font-mono">{level}%</span>
+                        </div>
+                        <div className="w-full bg-white/5 rounded-full h-2">
+                          <div 
+                            className="bg-amber-500 h-2 rounded-full transition-all duration-1000 ease-out group-hover:shadow-[0_0_10px_rgba(245,158,11,0.5)]" 
+                            style={{ width: `${level}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* SOFT SKILLS */}
+              <div className="bg-[#111] p-6 rounded-2xl border border-white/10">
+                <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_10px_#06b6d4]"></span>
+                  Soft Skills
+                </h3>
+                <div className="space-y-5">
+                  {project.details.softSkills.map((skill, i) => {
+                    const level = getSkillLevel(skill);
+                    return (
+                      <div key={i} className="group">
+                        <div className="flex justify-between mb-1.5">
+                          <span className="text-sm font-medium text-gray-300">{skill}</span>
+                          <span className="text-xs text-cyan-500/70 font-mono">{level}%</span>
+                        </div>
+                        <div className="w-full bg-white/5 rounded-full h-2">
+                          <div 
+                            className="bg-cyan-500 h-2 rounded-full transition-all duration-1000 ease-out group-hover:shadow-[0_0_10px_rgba(6,182,212,0.5)]" 
+                            style={{ width: `${level}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
     </main>

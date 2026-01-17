@@ -6,144 +6,120 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 export const Navbar = () => {
-
-
   const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const links = [
-    { name: 'Accueil', href: '/' },
     { name: 'À propos', href: '#about' },
     { name: 'Projets', href: '#projects' },
     { name: 'Compétences', href: '#skills' },
-    { name: 'Contact', href: 'mailto:marzoukmarecar5@gmail.com' },
+    { name: 'Contact', href: '/contact' }
   ];
 
+  // Animation simple du menu mobile (Apparition / Disparition)
   useGSAP(() => {
-    const mm = gsap.matchMedia();
-
-    mm.add("(max-width: 767px)", () => {
-      if (isOpen) {
-        // OUVERTURE : On transforme la pilule en rectangle arrondi
-        
-        // 1. Le conteneur devient un rectangle (moins arrondi)
-        gsap.to(containerRef.current, {
-          borderRadius: "24px", // Coins moins ronds pour laisser de la place
-          width: "100%",        // Prend toute la largeur dispo
-          maxWidth: "360px",    // Limite pour pas être trop large
-          backgroundColor: "rgba(10, 10, 10, 0.95)", // Plus opaque pour la lisibilité
-          duration: 0.4,
-          ease: "power2.out"
-        });
-
-        // 2. Dérouler le menu
-        gsap.to(menuRef.current, {
-          height: "auto",
-          opacity: 1,
-          duration: 0.5,
-          ease: "power3.out",
-        });
-        
-        // 3. Apparition des liens
-        gsap.fromTo(".nav-link-mobile", 
-          { y: -10, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, delay: 0.1 }
-        );
-
-      } else {
-        // FERMETURE : Retour à la pilule
-        
-        // 1. Replier le menu
-        gsap.to(menuRef.current, {
-          height: 0,
-          opacity: 0,
-          duration: 0.3,
-          ease: "power3.inOut",
-        });
-
-        // 2. Le conteneur redevient une pilule (attendre la fin du repli)
-        gsap.to(containerRef.current, {
-          borderRadius: "0", // Full rounded
-          width: "auto",          // Largeur auto selon le contenu (logo + burger)
-          backgroundColor: "rgba(10, 10, 10, 0.6)", // Retour à la transparence
-          duration: 0.4,
-          delay: 0.2 // Petit délai pour éviter que ça coupe le texte
-        });
-      }
-    });
-
-    // Reset Desktop
-    mm.add("(min-width: 768px)", () => {
-      gsap.set(menuRef.current, { height: "auto", opacity: 1 });
-      gsap.set(containerRef.current, { borderRadius: "9999px", width: "auto", backgroundColor: "rgba(10, 10, 10, 0.6)" });
-    });
-
-  }, { scope: containerRef, dependencies: [isOpen] });
+    if (isOpen) {
+      // Ouvre le menu : descend légèrement et devient visible
+      gsap.to(menuRef.current, {
+        y: 0,
+        opacity: 1,
+        visibility: 'visible',
+        duration: 0.3,
+        ease: "power2.out"
+      });
+      // Anime les liens un par un pour un effet sympa
+      gsap.fromTo(".mobile-link",
+        { y: -10, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.05, duration: 0.3, delay: 0.1 }
+      );
+    } else {
+      // Ferme le menu : remonte et disparaît
+      gsap.to(menuRef.current, {
+        y: -10,
+        opacity: 0,
+        duration: 0.2,
+        ease: "power2.in",
+        onComplete: () => {
+           // On cache complètement l'élément à la fin pour ne pas gêner les clics
+           if (menuRef.current) menuRef.current.style.visibility = 'hidden';
+        }
+      });
+    }
+  }, { dependencies: [isOpen] });
 
   return (
-    <div className="fixed top-4 md:top-6 left-0 w-full z-50 flex justify-center px-4 pointer-events-none">
-      {/* pointer-events-auto est important sur le nav pour qu'on puisse cliquer dessus,
-         mais pas sur toute la largeur de l'écran (div parent) 
-      */}
-      <nav 
-        ref={containerRef}
-        className="pointer-events-auto relative bg-[#0a0a0a]/60 backdrop-blur-md border border-white/10 shadow-2xl overflow-hidden rounded-full"
-        style={{ minWidth: 'min-content' }} // Empêche d'être trop petit
-      >
-        <div className="px-5 py-3 md:px-6 md:py-3 flex flex-col md:flex-row md:items-center">
-          
-          {/* HEADER (Logo + Burger) */}
-          <div className="flex items-center justify-between gap-4 md:gap-8 w-full md:w-auto">
-            <span className="font-bold text-white text-lg tracking-tight whitespace-nowrap">
-              M<span className="text-cyan-400">.</span>Marecar
-            </span>
+    <div className="fixed top-6 left-0 w-full z-50 flex flex-col items-center pointer-events-none">
+      
+      {/* 1. LA BARRE PRINCIPALE (Dynamic Island fixe) */}
+      <nav className="pointer-events-auto bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 shadow-2xl rounded-full px-2 py-2 flex items-center justify-between gap-2 transition-all hover:border-white/20 hover:shadow-cyan-500/10 hover:shadow-lg">
+        
+        {/* Logo */}
+        <Link href="/" className="pl-4 pr-2 font-bold text-white tracking-tight hover:text-cyan-400 transition-colors">
+          Marzouk<span className="text-cyan-400">.</span>
+        </Link>
 
-            <button 
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-1 text-gray-300 hover:text-white transition-colors focus:outline-none"
-              aria-label="Menu"
+        {/* Liens Desktop (Cachés sur mobile) */}
+        <div className="hidden md:flex items-center gap-1">
+          {links.map((link) => (
+            <Link 
+              key={link.name}
+              href={link.href}
+              className="text-sm font-medium text-gray-400 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all"
             >
-              {/* Icône Burger / Croix simple */}
-              <div className="w-6 h-6 flex items-center justify-center relative">
-                 <span className={`absolute w-full h-0.5 bg-white transition-all ${isOpen ? 'rotate-45' : '-translate-y-1.5'}`}></span>
-                 <span className={`absolute w-full h-0.5 bg-white transition-all ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-                 <span className={`absolute w-full h-0.5 bg-white transition-all ${isOpen ? '-rotate-45' : 'translate-y-1.5'}`}></span>
-              </div>
-            </button>
-          </div>
-
-          {/* MENU DÉROULANT */}
-          <div ref={menuRef} className="h-0 md:h-auto opacity-0 md:opacity-100 overflow-hidden md:overflow-visible w-full md:w-auto">
-            
-            <div className="flex flex-col md:flex-row md:items-center gap-1 pt-6 md:pt-0 pb-2 md:pb-0 border-t border-white/10 md:border-none mt-4 md:mt-0">
-              
-              {links.map((link) => (
-                <Link 
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="nav-link-mobile whitespace-nowrap block w-full md:w-auto px-4 py-3 md:py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 rounded-xl md:rounded-full transition-colors text-center md:text-left"
-                >
-                  {link.name}
-                </Link>
-              ))}
-
-              <div className="hidden md:block w-[1px] h-6 bg-white/10 mx-2"></div>
-              
-              {/* Bouton CV */}
-              <Link 
-                href="/cv.pdf" 
-                target="_blank"
-                className="nav-link-mobile mt-2 md:mt-0 block w-full md:w-auto px-6 py-2.5 text-sm font-bold text-black bg-white rounded-xl md:rounded-full hover:bg-cyan-50 transition-transform text-center"
-              >
-                CV
-              </Link>
-            </div>
-          </div>
-
+              {link.name}
+            </Link>
+          ))}
+          
         </div>
+
+        {/* Bouton Contact (Desktop) */}
+        <Link 
+          href="/contact"
+          target="_self"
+          className="hidden md:block bg-white text-black text-xs font-bold px-5 py-2.5 rounded-full hover:scale-105 transition-transform mr-1"
+        >
+          Voir mon CV
+        </Link>
+
+        {/* Bouton Burger (Mobile uniquement) */}
+        <button 
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden p-2.5 bg-white/5 rounded-full text-white hover:bg-white/10 transition-colors active:scale-95"
+        >
+           {/* Icône qui change (Burger <-> Croix) */}
+           <div className="w-5 h-5 flex flex-col justify-center items-center relative">
+              <span className={`absolute h-0.5 w-5 bg-white rounded-full transition-all duration-300 ${isOpen ? 'rotate-45' : '-translate-y-1'}`}></span>
+              <span className={`absolute h-0.5 w-5 bg-white rounded-full transition-all duration-300 ${isOpen ? '-rotate-45' : 'translate-y-1'}`}></span>
+           </div>
+        </button>
       </nav>
+
+      {/* 2. LE MENU MOBILE (Bulle séparée juste en dessous) */}
+      <div 
+        ref={menuRef}
+        className="pointer-events-auto mt-2 w-[90vw] max-w-[300px] bg-[#111] border border-white/10 rounded-3xl p-2 shadow-xl flex flex-col gap-1 opacity-0 invisible translate-y-[-10px]"
+      >
+        {links.map((link) => (
+          <Link 
+            key={link.name}
+            href={link.href}
+            onClick={() => setIsOpen(false)}
+            className="mobile-link text-center text-sm font-medium text-gray-300 hover:text-white py-3 hover:bg-white/5 rounded-2xl transition-colors"
+          >
+            {link.name}
+          </Link>
+        ))}
+        
+        <Link 
+          href="/contact"
+          target="_self"
+          onClick={() => setIsOpen(false)}
+          className="mobile-link mt-1 text-center text-sm font-bold bg-cyan-500/10 text-cyan-400 py-3 rounded-2xl border border-cyan-500/20"
+        >
+          Voir mon CV
+        </Link>
+      </div>
+
     </div>
   );
 };

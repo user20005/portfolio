@@ -1,5 +1,9 @@
 export type Category = 'WEB' | 'GEII';
 
+export interface ProgressionStep {
+  title: string;
+  description: string;
+}
 export interface Project {
   id: string;
   title: string;
@@ -12,7 +16,7 @@ export interface Project {
     github?: string;
     demo?: string;
   };
-  // NOUVEAU : Les détails pour la page dédiée
+  progression?: ProgressionStep[];
   details?: {
     context: string;
     hardSkills: string[];
@@ -24,26 +28,26 @@ export interface Project {
 
 export const projects: Project[] = [
   // --- PROJETS WEB  ---
-  // {
-  //   id: 'web-rentcar',
-  //   title: 'Admin Location de Voiture',
-  //   category: 'WEB',
-  //   context: 'SaaS / CRM',
-  //   description: "Dashboard d'administration complet pour agences de location. Gestion de flotte en temps réel et planning.",
-  //   image: '',
-  //   tags: ['React', 'TypeScript', 'Supabase'],
-  //   links: { github: '#' }
-  // },
-  // {
-  //   id: 'web-iot',
-  //   title: 'Dashboard IoT Industriel',
-  //   category: 'WEB',
-  //   context: 'Projet Freelance',
-  //   description: "Plateforme SaaS de visualisation de données capteurs en temps réel.",
-  //   image: '',
-  //   tags: ['Next.js', 'Socket.io', 'Redis'],
-  //   links: { github: '#' }
-  // },
+  {
+    id: 'web-rentcar',
+    title: 'Admin Location de Voiture',
+    category: 'WEB',
+    context: 'SaaS / CRM',
+    description: "Dashboard d'administration complet pour agences de location. Gestion de flotte en temps réel et planning.",
+    image: '',
+    tags: ['React', 'TypeScript', 'Supabase'],
+    links: { github: '#' }
+  },
+  {
+    id: 'web-iot',
+    title: 'Dashboard IoT Industriel',
+    category: 'WEB',
+    context: 'Projet Freelance',
+    description: "Plateforme SaaS de visualisation de données capteurs en temps réel.",
+    image: '',
+    tags: ['Next.js', 'Socket.io', 'Redis'],
+    links: { github: '#' }
+  },
 
   // --- PROJETS GEII (Avec les pages détaillées) ---
   {
@@ -52,7 +56,13 @@ export const projects: Project[] = [
     category: 'GEII',
     context: 'SAE 1.01 - Logique',
     description: "Système d'alarme sur FPGA avec différenciation des codes utilisateur et technicien.",
-    image: '/portfolio/alarme.jpg',
+    image: '/portfolio/alarme/alarme.jpg',
+    progression: [
+      { title: "Analyse du Cahier des Charges", description: "Compréhension des exigences fonctionnelles et contraintes matérielles." },
+      { title: "Conception Circuits", description: "Développement des modules VHDL pour la gestion des codes et des états de l'alarme." },
+      { title: "Simulation", description: "Simulation du système sur Waveforme pour valider le comportement." },
+      { title: "Implémentation", description: "Utilisation de Quartus pour synthétiser le design et le programmer sur la carte FPGA." }
+    ],
     tags: ['VHDL', 'FPGA', 'Logique Combinatoire'],
     links: {},
     details: {
@@ -60,13 +70,14 @@ export const projects: Project[] = [
       hardSkills: [
         "Programmation VHDL",
         "Synthèse et Routage (Quartus)",
-        "Machines à états finis (FSM)",
+        "Circuits Séquentiels et Combinatoires",
         "Testbench et simulation"
       ],
       softSkills: [
         "Logique déductive",
         "Optimisation des ressources",
-        "Gestion des contraintes temporelles"
+        "Gestion des contraintes temporelles",
+        "Travail en équipe"
       ],
       bilan: "Première approche concrète du hardware programmable. J'ai appris à penser en 'parallèle' plutôt qu'en 'séquentiel' (comme en C)."
     }
@@ -76,22 +87,29 @@ export const projects: Project[] = [
     title: 'Robot Aspirateur',
     category: 'GEII',
     context: 'SAE 1.02 - Embarqué',
+    progression: [
+      { title: "Étude des Capteurs", description: "Analyse des capteurs IR pour détection d'obstacles et de vide." },
+      { title: "Intégration Matérielle", description: "Assemblage des composants électroniques (optocoupleurs, ultrasons)." },
+      { title: "Développement", description: "Programmation en C++ sur Arduino pour la détection obstacles." },
+      { title: "Validation", description: "Validation sur banc d'essai avec l'oscilloscope." }
+    ],
     description: "Robot autonome avec évitement d'obstacles et détection du vide.",
-    image: '/portfolio/roomba.png',
-    tags: ['Arduino', 'C++', 'Capteurs IR'],
+    image: '/portfolio/rommba/roomba.png',
+    tags: ['Arduino', 'C++', 'Capteurs IR', 'Ultrasons'],
     links: {},
     details: {
       context: "Développement du firmware d'un robot aspirateur autonome. Le robot doit couvrir une surface sans tomber dans les escaliers ni heurter les murs.",
       hardSkills: [
         "Programmation C++ sur microcontrôleur",
-        "Traitement du signal (Capteurs IR)",
+        "Traitement du signal (Capteurs IR, Ultrasons(HC-SR04))",
         "Contrôle moteur (PWM / Pont en H)",
         "Débuggage hardware (Oscilloscope)"
       ],
       softSkills: [
         "Travail en binôme",
         "Gestion de version (Git)",
-        "Résolution de problèmes complexes"
+        "Résolution de problèmes complexes",
+        "Adaptabilité face aux contraintes matérielles"
       ],
       bilan: "Un projet complet mêlant code et électronique. J'ai particulièrement aimé l'optimisation de l'algorithme de déplacement pour couvrir le maximum de surface."
     }
@@ -102,7 +120,13 @@ export const projects: Project[] = [
     category: 'GEII',
     context: 'SAE 2.01 - Puissance',
     description: "Chaîne de conversion d'énergie pour vélo électrique (Hacheur série).",
-    image: '/portfolio/velo.jpg',
+    image: '/portfolio/velo/velo.jpg',
+    progression: [
+      { title: "Analyse Théorique", description: "Étude des principes de l'électronique de puissance et du hacheur série." },
+      { title: "Dimensionnement", description: "Calcul des composants (MOSFET, diodes, résistances)." },
+      { title: "Simulation", description: "Modélisation du système sous PSIM pour valider les performances." },
+      { title: "Tests Pratiques", description: "Creation de la carte électronique et soudure des composants." }
+    ],
     tags: ['PSIM', 'Hacheur', 'Moteur DC'],
     links: {},
     details: {
@@ -122,18 +146,24 @@ export const projects: Project[] = [
     }
   },{
     id: 'geii-robot-esp32',
-    title: 'Robot Suiveur de Ligne',
+    title: 'Robot esp32 bluetooth',
     category: 'GEII',
     context: 'SAE 2.02 - Systèmes Embarqués',
-    description: "Robot suiveur de ligne avec ESP32 et capteurs infrarouges.",
-    image: '/portfolio/robot-ligne.jpg',
-    tags: ['ESP32', 'MicroPython', 'Capteurs IR'],
+    description: "Robot esp32 bluetooth avec ESP32 et capteurs ultrasoniques.",
+    image: '/portfolio/robot/esp32.jpeg',
+    progression: [
+      { title: "Choix du Microcontrôleur", description: "Sélection de l'ESP32 pour ses capacités." },
+      { title: "Intégration des Capteurs", description: "Connexion et calibration des capteurs ultrasoniques pour la détection d'obstacles." },
+      { title: "Développement du Firmware", description: "Programmation en C++ pour la communication Bluetooth,WIFI et le contrôle des moteurs." },
+      { title: "Tests et Optimisation", description: "Validation des performances sur piste et ajustement des paramètres." }
+    ],
+    tags: ['ESP32', 'Bluetooth', 'Capteurs Ultrasoniques'],
     links: {},
     details: {
-      context: "Développement d'un robot suiveur de ligne utilisant une carte ESP32 programmée en MicroPython. Le robot doit suivre une trajectoire définie par une ligne noire sur fond blanc.",
+      context: "Développement d'un robot utilisant une carte ESP32 programmée en C++. Le robot doit suivre une trajectoire définie par une ligne noire sur fond blanc.",
       hardSkills: [
-        "Programmation MicroPython sur ESP32",
-        "Traitement de signal des capteurs IR",
+        "Programmation C++ sur ESP32",
+        "Traitement de signal des capteurs ultrasoniques",
         "Contrôle moteur (PWM)",  
         "Algorithmes de suivi de ligne"
       ],
@@ -151,8 +181,14 @@ export const projects: Project[] = [
     category: 'GEII',
     context: 'SAE 3.01 - Supervision',
     description: "Système d'analyse de gisement solaire sous LabVIEW.",
-    image: '/portfolio/soleis.png',
-    tags: ['LabVIEW', 'Instrumentation', 'Capteurs'],
+    image: '/portfolio/ags/soleis.png',
+    progression: [
+      { title: "Étude du Cahier des Charges", description: "Compréhension des besoins en acquisition et traitement des données solaires." },
+      { title: "Développement de l'IHM", description: "Création de l'interface utilisateur sous LabVIEW pour la visualisation des données." },
+      { title: "Création de la carte électronique", description: "Conception et assemblage de la carte d'acquisition des capteurs avec des filtres." },
+      { title: "Conversion analogique - numérique", description: "Mise en place de la conversion A/N pour le traitement numérique des signaux sur le PIC18F45K20." }
+    ],
+    tags: ['LabVIEW', 'Instrumentation', 'Capteurs', 'PIC18F45K20'],
     links: {},
     details: {
       context: "Création d'une interface de supervision pour caractériser le rendement de panneaux solaires en fonction de l'ensoleillement.",
@@ -165,7 +201,8 @@ export const projects: Project[] = [
       softSkills: [
         "Design d'interface utilisateur",
         "Synthèse de données",
-        "Curiosité pour les énergies renouvelables"
+        "Gestion de projet",
+        "Travail en équipe"
       ],
       bilan: "Maîtrise de l'environnement LabVIEW et de la chaîne d'acquisition complète, du capteur à l'écran."
     }
@@ -175,8 +212,15 @@ export const projects: Project[] = [
     category: 'GEII',
     context: 'SAE 3.02 - Instrumentation',
     description: "Conception complète d'un circuit de conditionnement pour capteur de température PT100. Linéarisation du signal.",
-    image: '/portfolio/pt100.jpg',
-    tags: ['LTspice', 'AOP', 'Pont de Wheatstone'],
+    image: '/portfolio/pt100/pt100.jpg',
+    progression: [
+      { title: "Analyse du Capteur PT100", description: "Étude des caractéristiques du Sonde PT100." },
+      { title: "Conception du Circuit", description: "Développement du schéma de conditionnement avec amplification et linéarisation sur Ltspice." },
+      { title: "Simulation LTspice", description: "Modélisation et simulation du circuit pour valider les performances." },
+      { title: "Implémentation et Tests", description: "Réalisation du prototype, tests pratiques et validation des résultats." },
+      { title: "Intégration ESP32 et MQTT", description: "Ajout d'un module ESP32 pour la transmission des données via MQTT chiffré." }
+    ],
+    tags: ['LTspice', 'AOP', 'MQTT'],
     links: {},
     details: {
       context: "Conception complète d'un circuit de conditionnement pour capteur de température PT100. Linéarisation du signal.",
@@ -192,7 +236,8 @@ export const projects: Project[] = [
         "Logique",
         "Travail en équipe"
       ],
-      bilan: "Approfondissement des connaissances en électronique analogique et en instrumentation."
+      bilan: "Approfondissement des connaissances en électronique analogique et en instrumentation.",
+      
     }
   }
 ];

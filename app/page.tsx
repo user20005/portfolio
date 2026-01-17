@@ -16,6 +16,7 @@ export default function Home() {
       <div id="skills" className="relative z-10 -mt-20 pt-20">
         <Skills />
       </div>
+
     </main>
   );
 }
