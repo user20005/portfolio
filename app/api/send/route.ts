@@ -22,8 +22,8 @@ export async function POST(request: Request) {
     // 3. Envoi de l'email
     const data = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>', // Domaine par défaut de Resend (marche direct)
-      to: ['ton-email@gmail.com'], // REMPLACE PAR TON ADRESSE PERSO
-      subject: `Nouveau message de ${name}`,
+      to: ['nemendmd@gmail.com'], // REMPLACE PAR TON ADRESSE PERSO
+      subject: `Nouveau message de ${name} via le portfolio`,
       replyTo: email, // Pour répondre directement à la personne
       text: `Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     });

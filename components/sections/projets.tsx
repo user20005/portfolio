@@ -19,7 +19,6 @@ export const Projects = () => {
   const filteredProjects = projects.filter(project => project.category === activeCategory);
 
   useGSAP(() => {
-    // Animation de transition entre les catégories (Fade Out / Fade In)
     gsap.fromTo('.project-card', 
       { y: 30, opacity: 0, scale: 0.98 },
       { y: 0, opacity: 1, scale: 1, duration: 0.5, stagger: 0.1, ease: "power3.out", overwrite: true }
@@ -29,8 +28,7 @@ export const Projects = () => {
   return (
     <section ref={containerRef} id="projects" className="py-24 bg-[#0a0a0a] relative overflow-hidden min-h-[75vh]">
       
-      {/* FOND D'AMBIANCE DYNAMIQUE */}
-      {/* Change de couleur selon la catégorie */}
+
       <div 
         className={`absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] blur-[150px] rounded-full pointer-events-none transition-colors duration-1000 ease-in-out opacity-40 ${
           activeCategory === 'WEB' ? 'bg-cyan-600/20' : 'bg-amber-600/20'
@@ -53,7 +51,6 @@ export const Projects = () => {
             </p>
           </div>
 
-          {/* SWITCH PREMIUM STYLE IOS */}
           <div className="p-1.5 bg-white/5 border border-white/10 rounded-full flex items-center relative w-[280px]">
             {/* Le fond glissant */}
             <div 
@@ -94,11 +91,10 @@ export const Projects = () => {
   );
 };
 
-// Composant Carte Amélioré
+// Composant Carte 
 const ProjectCard = ({ project, activeCategory }: { project: Project, activeCategory: Category }) => {
   const isWeb = activeCategory === 'WEB';
   
-  // Couleurs dynamiques selon la catégorie
   const themeColor = isWeb ? 'cyan' : 'amber';
   const borderColor = isWeb ? 'group-hover:border-cyan-500/50' : 'group-hover:border-amber-500/50';
   const shadowColor = isWeb ? 'group-hover:shadow-cyan-500/10' : 'group-hover:shadow-amber-500/10';
@@ -110,16 +106,14 @@ const ProjectCard = ({ project, activeCategory }: { project: Project, activeCate
       {/* ZONE IMAGE / COUVERTURE */}
       <div className="h-48 relative overflow-hidden bg-[#050505] border-b border-white/5">
         
-        {/* Si tu as une image dans ton objet project, tu peux décommenter ça : */}
         {project.image && <Image src={project.image} alt={project.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />}
         
-        {/* En attendant, voici un fond stylé généré en CSS */}
         <div className={`absolute inset-0 bg-gradient-to-br ${isWeb ? 'from-slate-900 via-cyan-900/20 to-slate-900' : 'from-slate-900 via-amber-900/20 to-slate-900'} opacity-60 group-hover:opacity-100 transition-opacity duration-500`} />
         
         {/* Motif de grille décoratif */}
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.05]" />
 
-        {/* Badge Context (ex: Stage, Projet Perso) */}
+        {/* Badge Context  */}
         <div className="absolute top-4 left-4 z-10">
           <span className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase bg-black/60 backdrop-blur-md border border-white/10 rounded-lg text-white shadow-lg">
             {project.context}
@@ -155,7 +149,7 @@ const ProjectCard = ({ project, activeCategory }: { project: Project, activeCate
 
         {/* Boutons d'action */}
         <div className="flex items-center gap-3 pt-4 border-t border-white/5">
-           {/* Bouton GitHub (Secondaire) */}
+           {/* Bouton GitHub */}
            {project.links.github && (
             <a 
               href={project.links.github} 
@@ -167,7 +161,7 @@ const ProjectCard = ({ project, activeCategory }: { project: Project, activeCate
             </a>
           )}
 
-          {/* Bouton Principal (Demo ou Rapport) */}
+          {/* Bouton Principal  */}
           {isWeb ? (
              project.links.demo && (
               <a 

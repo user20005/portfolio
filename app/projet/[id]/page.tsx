@@ -73,7 +73,7 @@ export default async function ProjectPage(props: { params: Promise<{ id: string 
           </div>
         </div>
 
-        {/* IMAGE PRINCIPALE DU PROJET (Celle-ci reste car c'est la couverture) */}
+        {/* IMAGE PRINCIPALE DU PROJET */}
         <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-16 border border-white/10 bg-[#111] shadow-2xl">
            {!project.image ? (
              <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-amber-900/40" />
@@ -93,7 +93,7 @@ export default async function ProjectPage(props: { params: Promise<{ id: string 
         {/* CONTENU PRINCIPAL */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
-          {/* COLONNE GAUCHE (8 colonnes) */}
+          {/* COLONNE GAUCHE  */}
           <div className="lg:col-span-8 space-y-16">
             
             {/* 1. CONTEXTE */}
@@ -107,7 +107,7 @@ export default async function ProjectPage(props: { params: Promise<{ id: string 
               </div>
             </section>
 
-            {/* 2. TIMELINE HORIZONTALE (TEXTE SEULEMENT) */}
+            {/* 2. TIMELINE HORIZONTALE */}
             {project.progression && project.progression.length > 0 && (
               <section className="relative">
                 <h2 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
@@ -123,12 +123,10 @@ export default async function ProjectPage(props: { params: Promise<{ id: string 
                   {project.progression.map((step, i) => (
                     <div key={i} className="min-w-[260px] md:min-w-[300px] snap-center flex flex-col relative group">
                       
-                      {/* Numéro de l'étape (Bulle) */}
                       <div className={`w-14 h-14 rounded-full ${accentColor} text-black font-bold text-xl flex items-center justify-center mb-6 relative z-10 shadow-[0_0_15px_rgba(0,0,0,0.5)] group-hover:scale-110 transition-transform`}>
                         {i + 1}
                       </div>
 
-                      {/* Carte Purement Textuelle */}
                       <div className={`flex-1 bg-[#111] border border-white/10 rounded-2xl p-6 transition-all duration-300 ${borderColor} hover:bg-white/5 flex flex-col`}>
                         <div className={`text-xs font-mono font-bold mb-3 opacity-60 uppercase tracking-widest ${textColor}`}>
                           Étapes {i + 1}
@@ -161,7 +159,7 @@ export default async function ProjectPage(props: { params: Promise<{ id: string 
 
           </div>
 
-          {/* COLONNE DROITE (4 colonnes) - Sticky */}
+          {/* COLONNE DROITE  */}
           <div className="lg:col-span-4 relative">
             <div className="sticky top-32 space-y-8">
               

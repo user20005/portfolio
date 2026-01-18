@@ -27,7 +27,7 @@ export const Skills = () => {
   return (
     <section ref={containerRef} id="skills" className="py-24 bg-[#0a0a0a] relative overflow-hidden">
       
-      {/* FOND DYNAMIQUE (Change de couleur selon le tab) */}
+      {/* FOND DYNAMIQUE  */}
       <div 
         className={`absolute top-1/4 right-0 w-[600px] h-[600px] blur-[150px] rounded-full pointer-events-none transition-colors duration-700 opacity-30 ${
           activeTab === 'GEII' ? 'bg-amber-600/20' : 'bg-cyan-600/20'
@@ -40,10 +40,13 @@ export const Skills = () => {
         <div className="flex flex-col items-center mb-16 space-y-8">
           <div className="text-center">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-              Arsenal <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Technique</span>
+              Mes <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Compétences</span>
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Ma boîte à outils, allant de la conception de circuits imprimés aux architectures web scalables.
+            <p className="`text-gray-400 max-w-2xl mx-auto ">
+              {activeTab === 'GEII' 
+                ? "Compétences techniques acquises durant ma formation en Génie Électrique et Informatique Industrielle." 
+                : "Technologies et outils que j'utilise pour développer des applications web."
+              }
             </p>
           </div>
 
@@ -159,13 +162,13 @@ export const Skills = () => {
         {/* BARRE OUTILS / PROTOCOLES (FOOTER) */}
         <div className="mt-12 pt-10 border-t border-white/5">
           <p className="text-center text-sm font-mono text-gray-500 mb-6 uppercase tracking-widest">
-            {activeTab === 'GEII' ? 'Protocoles & Hardware' : 'Stack & Outils Favoris'}
+            {activeTab === 'GEII' ? 'Protocoles & Hardware' : 'Stack & Outils'}
           </p>
           
           <div className="flex flex-wrap justify-center gap-3">
             {(activeTab === 'GEII' 
               ? ['I2C', 'SPI', 'UART', 'MQTT', 'LoRaWAN', 'CAN Bus', 'Oscilloscope', 'Multimètre', 'Imprimante 3D'] 
-              : ['VS Code', 'Figma', 'Postman', 'Notion', 'ESLint', 'Prettier', 'Jira', 'Slack', 'npm/pnpm']
+              : ['VS Code', 'Figma', 'Notion', 'ESLint', 'Prettier','npm/pnpm']
             ).map((item) => (
               <span 
                 key={item} 
@@ -216,7 +219,6 @@ const SkillGroup = ({ title, icon, skills, color }: any) => {
               </span>
             </div>
             
-            {/* Barre de progression avec effet Glow */}
             <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden relative">
               <div 
                 className={`h-full rounded-full transition-all duration-1000 ease-out ${

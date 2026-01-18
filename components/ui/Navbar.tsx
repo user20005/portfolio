@@ -27,20 +27,17 @@ export const Navbar = () => {
         duration: 0.3,
         ease: "power2.out"
       });
-      // Anime les liens un par un pour un effet sympa
       gsap.fromTo(".mobile-link",
         { y: -10, opacity: 0 },
         { y: 0, opacity: 1, stagger: 0.05, duration: 0.3, delay: 0.1 }
       );
     } else {
-      // Ferme le menu : remonte et disparaît
       gsap.to(menuRef.current, {
         y: -10,
         opacity: 0,
         duration: 0.2,
         ease: "power2.in",
         onComplete: () => {
-           // On cache complètement l'élément à la fin pour ne pas gêner les clics
            if (menuRef.current) menuRef.current.style.visibility = 'hidden';
         }
       });
@@ -50,7 +47,7 @@ export const Navbar = () => {
   return (
     <div className="fixed top-6 left-0 w-full z-50 flex flex-col items-center pointer-events-none">
       
-      {/* 1. LA BARRE PRINCIPALE (Dynamic Island fixe) */}
+      {/* 1. LA BARRE PRINCIPALE (Dynamic Island ) */}
       <nav className="pointer-events-auto bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 shadow-2xl rounded-full px-2 py-2 flex items-center justify-between gap-2 transition-all hover:border-white/20 hover:shadow-cyan-500/10 hover:shadow-lg">
         
         {/* Logo */}
@@ -58,7 +55,7 @@ export const Navbar = () => {
           Marzouk<span className="text-cyan-400">.</span>
         </Link>
 
-        {/* Liens Desktop (Cachés sur mobile) */}
+        {/* Liens Desktop  */}
         <div className="hidden md:flex items-center gap-1">
           {links.map((link) => (
             <Link 
@@ -81,12 +78,11 @@ export const Navbar = () => {
           Voir mon CV
         </Link>
 
-        {/* Bouton Burger (Mobile uniquement) */}
+        {/* Bouton Burger (Mobile ) */}
         <button 
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden p-2.5 bg-white/5 rounded-full text-white hover:bg-white/10 transition-colors active:scale-95"
         >
-           {/* Icône qui change (Burger <-> Croix) */}
            <div className="w-5 h-5 flex flex-col justify-center items-center relative">
               <span className={`absolute h-0.5 w-5 bg-white rounded-full transition-all duration-300 ${isOpen ? 'rotate-45' : '-translate-y-1'}`}></span>
               <span className={`absolute h-0.5 w-5 bg-white rounded-full transition-all duration-300 ${isOpen ? '-rotate-45' : 'translate-y-1'}`}></span>
@@ -94,7 +90,7 @@ export const Navbar = () => {
         </button>
       </nav>
 
-      {/* 2. LE MENU MOBILE (Bulle séparée juste en dessous) */}
+      {/* 2. LE MENU MOBILE */}
       <div 
         ref={menuRef}
         className="pointer-events-auto mt-2 w-[90vw] max-w-[300px] bg-[#111] border border-white/10 rounded-3xl p-2 shadow-xl flex flex-col gap-1 opacity-0 invisible translate-y-[-10px]"

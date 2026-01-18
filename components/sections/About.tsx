@@ -24,7 +24,7 @@ export const About = () => {
           ease: "power2.out",
           scrollTrigger: {
             trigger: card,
-            start: "top 90%", // Déclenche l'animation un peu plus tôt
+            start: "top 90%",
           }
         }
       );
@@ -47,7 +47,7 @@ export const About = () => {
   }, { scope: containerRef });
 
   return (
-    // PY-16 : Hauteur globale réduite
+
     <section ref={containerRef} id="about" className="relative py-16 bg-[#0a0a0a] overflow-hidden">
       
       {/* Fond Décoratif */}
@@ -57,7 +57,7 @@ export const About = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
           
-          {/* --- COLONNE GAUCHE : TITRE STICKY --- */}
+          {/* --- COLONNE GAUCHE : TITRE  --- */}
           <div className="md:col-span-4">
             <div className="sticky top-24">
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-3 leading-tight">
@@ -76,10 +76,8 @@ export const About = () => {
           {/* --- COLONNE DROITE : TIMELINE --- */}
           <div className="md:col-span-8 relative timeline-container pl-8 md:pl-10 border-l border-white/5">
             
-            {/* La Ligne Lumineuse */}
             <div className="timeline-line absolute left-[-1px] top-0 w-[2px] bg-gradient-to-b from-cyan-400 via-blue-500 to-purple-600 shadow-[0_0_10px_rgba(34,211,238,0.4)]"></div>
 
-            {/* SPACE-Y-6 : Moins d'espace entre les cartes */}
             <div className="space-y-6">
               
               {/* ÉTAPE 1 */}
@@ -137,7 +135,7 @@ export const About = () => {
           </div>
         </div>
 
-        {/* --- FOCUS (Plus proche du haut) --- */}
+        {/* --- FOCUS --- */}
         <div className="mt-12 border-t border-white/5 pt-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <FocusCard 
@@ -169,7 +167,7 @@ export const About = () => {
   );
 };
 
-// Carte Focus plus compacte
+// Carte Focus
 const FocusCard = ({ title, desc, icon, color, bgColor }: any) => (
   <div className="group relative bg-[#111] border border-white/10 p-4 rounded-xl hover:-translate-y-1 transition-all duration-300">
     <div className={`absolute inset-0 ${bgColor} opacity-0 group-hover:opacity-10 rounded-xl transition-opacity`}></div>

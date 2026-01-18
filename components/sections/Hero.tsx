@@ -10,7 +10,7 @@ export const Hero = () => {
 
   useGSAP(
     () => {
-      // Animation d'entrée : Les blocs apparaissent un par un (pop effect)
+
       gsap.fromTo(
         ".bento-box",
         { scale: 0.9, opacity: 0, y: 20 },
@@ -20,7 +20,7 @@ export const Hero = () => {
           y: 0,
           stagger: 0.1,
           duration: 0.6,
-          ease: "back.out(1.2)", // Petit effet de rebond sympa
+          ease: "back.out(1.2)", 
           delay: 0.2,
         },
       );
@@ -35,9 +35,9 @@ export const Hero = () => {
       {/* Fond subtil technique */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none"></div>
 
-      {/* --- GRILLE BENTO --- */}
+      {/* --- GRILLE  --- */}
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-12 gap-4 relative z-10">
-        {/* BLOC 1 : INTRODUCTION (Prend 8 colonnes sur 12) */}
+        {/* BLOC 1 : INTRODUCTION */}
         <div className="bento-box md:col-span-8 bg-[#0a0a0a]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col justify-center space-y-4 hover:border-white/20 transition-colors group">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 w-fit">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
@@ -79,15 +79,14 @@ export const Hero = () => {
           </p>
         </div>
 
-        {/* BLOC 2 : PHOTO (Prend 4 colonnes sur 12) */}
+        {/* BLOC 2 : PHOTO */}
         <div className="bento-box md:col-span-4 bg-[#111] border border-white/10 rounded-3xl relative overflow-hidden min-h-[300px] group">
           <Image
-            src="/portfolio/PDP.png"
+            src="/PDP.png"
             alt="Marzouk"
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
           />
-          {/* Badge sur la photo */}
           <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-md border border-white/10 p-3 rounded-2xl flex items-center justify-between">
             <span className="text-sm font-bold text-white">Marzouk.M</span>
             <span className="flex h-2.5 w-2.5">
@@ -97,7 +96,7 @@ export const Hero = () => {
           </div>
         </div>
 
-        {/* BLOC 3 : INFO ÉTUDIANT (Prend 5 colonnes) */}
+        {/* BLOC 3 : INFO ÉTUDIANT */}
         <div className="bento-box md:col-span-5 bg-[#0a0a0a]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col justify-between hover:bg-white/5 transition-colors">
           <div className="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4 text-blue-400">
             <svg
@@ -124,8 +123,8 @@ export const Hero = () => {
           </div>
         </div>
 
-        {/* BLOC 4 : INFO DEV (Prend 4 colonnes) */}
-        <div className="bento-box md:col-span-4 bg-[#0a0a0a]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col justify-between hover:bg-white/5 transition-colors">
+        {/* BLOC 4 : INFO DEV  */}
+        <div className="bentobox md:col-span-4 bg-[#0a0a0a]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col justify-between hover:bg-white/5 transition-colors">
           <div className="w-10 h-10 bg-purple-500/20 rounded-xl flex items-center justify-center mb-4 text-purple-400">
             <svg
               width="24"
@@ -151,7 +150,7 @@ export const Hero = () => {
           </div>
         </div>
 
-        {/* BLOC 5 : RÉSEAUX (Prend 3 colonnes) */}
+        {/* BLOC 5 : RÉSEAUX  */}
         <div className="bento-box md:col-span-3 grid grid-cols-2 md:grid-cols-1 md:grid-rows-2 gap-4">
           {/* Bouton GitHub */}
           <a
@@ -160,7 +159,7 @@ export const Hero = () => {
             className="relative overflow-hidden bg-[#111] border border-white/10 rounded-3xl flex flex-col md:flex-row items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-300 group p-4 md:p-0">
             <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
-            {/* Icône GitHub (Visible et animée) */}
+            {/* Icône GitHub  */}
             <svg
               className="w-6 h-6 mb-2 md:mb-0 md:mr-2 transition-transform group-hover:scale-110"
               fill="currentColor"

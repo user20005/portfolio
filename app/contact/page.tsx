@@ -1,5 +1,5 @@
 import { Navbar } from '@/components/ui/Navbar';
-import { ContactForm } from '@/components/sections/contactForm'; // On importe ton nouveau composant
+import { ContactForm } from '@/components/sections/contactForm'; 
 
 export default function ContactPage() {
   return (
@@ -61,7 +61,7 @@ export default function ContactPage() {
                   <p className="text-xs text-gray-500 uppercase tracking-wider">Format PDF</p>
                 </div>
               </div>
-              <a href="/cv.pdf" target="_blank" className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors font-medium">
+              <a href="CV__Marzouk_Marecar.pdf" target="_blank" className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors font-medium">
                 Télécharger le document
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
               </a>

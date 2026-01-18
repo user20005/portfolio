@@ -56,7 +56,7 @@ export const projects: Project[] = [
     category: 'GEII',
     context: 'SAE 1.01 - Logique',
     description: "Système d'alarme sur FPGA avec différenciation des codes utilisateur et technicien.",
-    image: '/portfolio/alarme/alarme.jpg',
+    image: '/alarme/alarme.jpg',
     progression: [
       { title: "Analyse du Cahier des Charges", description: "Compréhension des exigences fonctionnelles et contraintes matérielles." },
       { title: "Conception Circuits", description: "Développement des modules VHDL pour la gestion des codes et des états de l'alarme." },
@@ -94,7 +94,7 @@ export const projects: Project[] = [
       { title: "Validation", description: "Validation sur banc d'essai avec l'oscilloscope." }
     ],
     description: "Robot autonome avec évitement d'obstacles et détection du vide.",
-    image: '/portfolio/rommba/roomba.png',
+    image: '/rommba/roomba.png',
     tags: ['Arduino', 'C++', 'Capteurs IR', 'Ultrasons'],
     links: {},
     details: {
@@ -120,7 +120,7 @@ export const projects: Project[] = [
     category: 'GEII',
     context: 'SAE 2.01 - Puissance',
     description: "Chaîne de conversion d'énergie pour vélo électrique (Hacheur série).",
-    image: '/portfolio/velo/velo.jpg',
+    image: '/velo/velo.jpg',
     progression: [
       { title: "Analyse Théorique", description: "Étude des principes de l'électronique de puissance et du hacheur série." },
       { title: "Dimensionnement", description: "Calcul des composants (MOSFET, diodes, résistances)." },
@@ -150,7 +150,7 @@ export const projects: Project[] = [
     category: 'GEII',
     context: 'SAE 2.02 - Systèmes Embarqués',
     description: "Robot esp32 bluetooth avec ESP32 et capteurs ultrasoniques.",
-    image: '/portfolio/robot/esp32.jpeg',
+    image: '/robot/esp32.jpeg',
     progression: [
       { title: "Choix du Microcontrôleur", description: "Sélection de l'ESP32 pour ses capacités." },
       { title: "Intégration des Capteurs", description: "Connexion et calibration des capteurs ultrasoniques pour la détection d'obstacles." },
@@ -181,7 +181,7 @@ export const projects: Project[] = [
     category: 'GEII',
     context: 'SAE 3.01 - Supervision',
     description: "Système d'analyse de gisement solaire sous LabVIEW.",
-    image: '/portfolio/ags/soleis.png',
+    image: '/ags/soleis.png',
     progression: [
       { title: "Étude du Cahier des Charges", description: "Compréhension des besoins en acquisition et traitement des données solaires." },
       { title: "Développement de l'IHM", description: "Création de l'interface utilisateur sous LabVIEW pour la visualisation des données." },
@@ -212,7 +212,7 @@ export const projects: Project[] = [
     category: 'GEII',
     context: 'SAE 3.02 - Instrumentation',
     description: "Conception complète d'un circuit de conditionnement pour capteur de température PT100. Linéarisation du signal.",
-    image: '/portfolio/pt100/pt100.jpg',
+    image: '/pt100/pt100.jpg',
     progression: [
       { title: "Analyse du Capteur PT100", description: "Étude des caractéristiques du Sonde PT100." },
       { title: "Conception du Circuit", description: "Développement du schéma de conditionnement avec amplification et linéarisation sur Ltspice." },
