@@ -135,7 +135,7 @@ export const projects: Project[] = [
         "Électronique de puissance (MOSFET, Diodes)",
         "Simulation thermique et électrique (PSIM)",
         "Régulation de vitesse (Boucle fermée)",
-        "Sécurité électrique"
+        "Sécurité électrique "
       ],
       softSkills: [
         "Prise de recul sur la sécurité",
