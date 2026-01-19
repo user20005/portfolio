@@ -29,25 +29,35 @@ export interface Project {
 export const projects: Project[] = [
   // --- PROJETS WEB  ---
   {
-    id: 'web-rentcar',
-    title: 'Admin Location de Voiture',
+    id: 'robot',
+    title: 'SAE ROBOT ESP32 WIFI',
     category: 'WEB',
-    context: 'SaaS / CRM',
-    description: "Dashboard d'administration complet pour agences de location. Gestion de flotte en temps réel et planning.",
-    image: '',
-    tags: ['React', 'TypeScript', 'Supabase'],
-    links: { github: '#' }
+    context: 'Projet universitaire',
+    description: "Interface de contrôle d'un robot via une application web(WEBSOCKET).",
+    image: '/robot/esp32.jpeg',
+    tags: ['C++', 'JavaScript', 'WebSocket'],
+    links: { github: 'https://github.com/user20005/robot' }
   },
   {
-    id: 'web-iot',
-    title: 'Dashboard IoT Industriel',
+    id: 'station-meteo',
+    title: 'Station Météo Qtcreator',
     category: 'WEB',
-    context: 'Projet Freelance',
-    description: "Plateforme SaaS de visualisation de données capteurs en temps réel.",
+    context: 'Projet universitaire',
+    description: "Application de visualisation des données d'une station météo.",
     image: '',
-    tags: ['Next.js', 'Socket.io', 'Redis'],
-    links: { github: '#' }
+    tags: ['C++', ' Qt', 'json'],
+    links: { github: 'https://github.com/user20005/station-meteo' }
+  },{
+    id: 'a-venir',
+    title: 'Projet à venir...',
+    category: 'WEB',
+    context: 'En production',
+    description: "Mise en progression de mon portfolio.",
+    image: '/soon.jpg',
+    tags: ['Bientôt Disponible'],
+    links: {}
   },
+
 
   // --- PROJETS GEII (Avec les pages détaillées) ---
   {
