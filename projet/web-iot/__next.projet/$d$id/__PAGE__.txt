@@ -1,7 +1,0 @@
-1:"$Sreact.fragment"
-2:I[62301,["/portfolio/_next/static/chunks/ff1a16fafef87110.js","/portfolio/_next/static/chunks/b985e5b20e520fe8.js"],"Navbar"]
-3:I[22016,["/portfolio/_next/static/chunks/ff1a16fafef87110.js","/portfolio/_next/static/chunks/b985e5b20e520fe8.js"],""]
-4:I[97367,["/portfolio/_next/static/chunks/ff1a16fafef87110.js","/portfolio/_next/static/chunks/7340adf74ff47ec0.js"],"OutletBoundary"]
-5:"$Sreact.suspense"
-0:{"buildId":"sjw901H5XHwE6F4mK4ewu","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"min-h-screen bg-[#0a0a0a] text-white flex flex-col","children":[["$","$L2",null,{}],["$","div",null,{"className":"flex-1 flex flex-col items-center justify-center p-4","children":[["$","h1",null,{"className":"text-3xl font-bold mb-4 text-red-500","children":"Projet introuvable"}],["$","$L3",null,{"href":"/#projects","className":"px-6 py-3 bg-cyan-600 rounded-full hover:bg-cyan-500 transition-colors font-bold","children":"Retour aux projets"}]]}]]}],[["$","script","script-0",{"src":"/portfolio/_next/static/chunks/ff1a16fafef87110.js","async":true}],["$","script","script-1",{"src":"/portfolio/_next/static/chunks/b985e5b20e520fe8.js","async":true}]],["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],"loading":null,"isPartial":false}
-6:null
