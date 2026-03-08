@@ -2,24 +2,28 @@
 
 import { useState, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation'; 
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname(); 
+
+  // Vérification 
+  const isHome = pathname === "/";
 
   const links = [
-    { name: 'À propos', href: '#about' },
-    { name: 'Projets', href: '#projects' },
-    { name: 'Compétences', href: '#skills' },
+    { name: 'À propos', href: '/#about' }, 
+    { name: 'Projets', href: '/#projects' },
+    { name: 'Compétences', href: '/#skills' },
     { name: 'Contact', href: '/contact' }
   ];
 
-  // Animation simple du menu mobile (Apparition / Disparition)
+  // Animation du menu mobile
   useGSAP(() => {
     if (isOpen) {
-      // Ouvre le menu : descend légèrement et devient visible
       gsap.to(menuRef.current, {
         y: 0,
         opacity: 1,
@@ -38,7 +42,7 @@ export const Navbar = () => {
         duration: 0.2,
         ease: "power2.in",
         onComplete: () => {
-           if (menuRef.current) menuRef.current.style.visibility = 'hidden';
+          if (menuRef.current) menuRef.current.style.visibility = 'hidden';
         }
       });
     }
@@ -47,41 +51,60 @@ export const Navbar = () => {
   return (
     <div className="fixed top-6 left-0 w-full z-50 flex flex-col items-center pointer-events-none">
       
-      {/* 1. LA BARRE PRINCIPALE (Dynamic Island ) */}
-      <nav className="pointer-events-auto bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 shadow-2xl rounded-full px-2 py-2 flex items-center justify-between gap-2 transition-all hover:border-white/20 hover:shadow-cyan-500/10 hover:shadow-lg">
+      {/* 1. LA BARRE PRINCIPALE */}
+      <nav className="pointer-events-auto bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 shadow-2xl rounded-full px-2 py-2 flex items-center justify-between gap-2 transition-all hover:border-white/20">
         
         {/* Logo */}
         <Link href="/" className="pl-4 pr-2 font-bold text-white tracking-tight hover:text-cyan-400 transition-colors">
           Marzouk<span className="text-cyan-400">.</span>
         </Link>
 
-        {/* Liens Desktop  */}
+        {/* Liens Desktop */}
         <div className="hidden md:flex items-center gap-1">
-          {links.map((link) => (
-            <Link 
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-gray-400 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all"
-            >
-              {link.name}
-            </Link>
-          ))}
-          
+          {isHome ? (
+            // Si ACCUEIL : 
+            links.map((link) => (
+              <Link 
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-gray-400 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all"
+              >
+                {link.name}
+              </Link>
+            ))
+          ) : (
+            // Si AUTRE PAGE : 
+            <>
+              <Link 
+                href="/"
+                className="text-sm font-medium text-gray-400 hover:text-white hover:bg-white/10 px-6 py-2 rounded-full transition-all"
+              >
+                Accueil
+              </Link>
+
+              <Link 
+                href="/contact"
+                className="text-sm font-medium text-gray-400 hover:text-white hover:bg-white/10 px-6 py-2 rounded-full transition-all"
+              >
+                Contact
+              </Link>
+            </>
+          )}
         </div>
 
-        {/* Bouton Contact (Desktop) */}
+        {/* Bouton CV (Toujours visible sur desktop) */}
         <Link 
-          href="/contact"
-          target="_self"
+          href="/CV__Marzouk_Marecar.pdf"
+          target="_blank"
           className="hidden md:block bg-white text-black text-xs font-bold px-5 py-2.5 rounded-full hover:scale-105 transition-transform mr-1"
         >
           Voir mon CV
         </Link>
 
-        {/* Bouton Burger (Mobile ) */}
+        {/* Bouton Burger (Mobile) */}
         <button 
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2.5 bg-white/5 rounded-full text-white hover:bg-white/10 transition-colors active:scale-95"
+          className="md:hidden p-2.5 bg-white/5 rounded-full text-white transition-colors"
         >
            <div className="w-5 h-5 flex flex-col justify-center items-center relative">
               <span className={`absolute h-0.5 w-5 bg-white rounded-full transition-all duration-300 ${isOpen ? 'rotate-45' : '-translate-y-1'}`}></span>
@@ -90,25 +113,35 @@ export const Navbar = () => {
         </button>
       </nav>
 
-      {/* 2. LE MENU MOBILE */}
+      {/* 2. LE MENU MOBILE (Conditionnel aussi) */}
       <div 
         ref={menuRef}
         className="pointer-events-auto mt-2 w-[90vw] max-w-[300px] bg-[#111] border border-white/10 rounded-3xl p-2 shadow-xl flex flex-col gap-1 opacity-0 invisible translate-y-[-10px]"
       >
-        {links.map((link) => (
+        {isHome ? (
+          links.map((link) => (
+            <Link 
+              key={link.name}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className="mobile-link text-center text-sm font-medium text-gray-300 hover:text-white py-3 hover:bg-white/5 rounded-2xl transition-colors"
+            >
+              {link.name}
+            </Link>
+          ))
+        ) : (
           <Link 
-            key={link.name}
-            href={link.href}
+            href="/"
             onClick={() => setIsOpen(false)}
             className="mobile-link text-center text-sm font-medium text-gray-300 hover:text-white py-3 hover:bg-white/5 rounded-2xl transition-colors"
           >
-            {link.name}
+            Accueil
           </Link>
-        ))}
+        )}
         
         <Link 
-          href="/contact"
-          target="_self"
+          href="/CV__Marzouk_Marecar.pdf"
+          target="_blank"
           onClick={() => setIsOpen(false)}
           className="mobile-link mt-1 text-center text-sm font-bold bg-cyan-500/10 text-cyan-400 py-3 rounded-2xl border border-cyan-500/20"
         >
