@@ -66,10 +66,10 @@ export const Hero = () => {
 
             {/* Ligne 2 : Le développeur */}
             <p className="text-lg md:text-xl text-gray-400">
-              & Développeur Fullstack{" "}
-              <span className="text-gray-500 text-base align-middle">
-                (4 ans d'exp)
-              </span>
+              & Développeur {" "}
+              <span className="text-purple-400 border-b border-purple-500/30 pb-0.5 font-medium">
+                React / Next.js
+              </span>{" "}
             </p>
           </div>
           <p className="text-gray-400 max-w-xl leading-relaxed">
@@ -82,10 +82,10 @@ export const Hero = () => {
         {/* BLOC 2 : PHOTO */}
         <div className="bento-box md:col-span-4 bg-[#111] border border-white/10 rounded-3xl relative overflow-hidden min-h-[300px] group">
           <Image
-            src="/PDP.png"
+            src="/pdp1.png"
             alt="Marzouk"
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+            className="object-cover transition-transform duration-700 opacity-100 backdrop-contrast-150 brightness-110"
           />
           <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-md border border-white/10 p-3 rounded-2xl flex items-center justify-between">
             <span className="text-sm font-bold text-white">Marzouk.M</span>
@@ -142,7 +142,7 @@ export const Hero = () => {
           </div>
           <div>
             <h3 className="text-white font-bold text-lg">
-              Développeur Fullstack
+              Développeur React / Next.js
             </h3>
             <p className="text-gray-400 text-sm mt-1">
               4 ans d'expérience React / Next.js C / C++
