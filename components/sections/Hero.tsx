@@ -10,7 +10,6 @@ export const Hero = () => {
 
   useGSAP(
     () => {
-
       gsap.fromTo(
         ".bento-box",
         { scale: 0.9, opacity: 0, y: 20 },
@@ -20,7 +19,7 @@ export const Hero = () => {
           y: 0,
           stagger: 0.1,
           duration: 0.6,
-          ease: "back.out(1.2)", 
+          ease: "back.out(1.2)",
           delay: 0.2,
         },
       );
@@ -42,7 +41,7 @@ export const Hero = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 w-fit">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
             <span className="text-xs font-medium text-cyan-300 uppercase tracking-wider">
-              Portfolio 
+              Portfolio
             </span>
           </div>
 
@@ -66,16 +65,17 @@ export const Hero = () => {
 
             {/* Ligne 2 : Le développeur */}
             <p className="text-lg md:text-xl text-gray-400">
-              & Développeur {" "}
+              & Développeur{" "}
               <span className="text-purple-400 border-b border-purple-500/30 pb-0.5 font-medium">
                 React / Next.js
               </span>{" "}
             </p>
           </div>
           <p className="text-gray-400 max-w-xl leading-relaxed">
-            Passionné par la création de solutions connectées. En parallèle de
-            mon cursus GEII, je mobilise mon expérience en développement Web et
-            mes acquis en électronique pour concevoir des projets IoT innovants
+            Passionné par le développement web,les systèmes embarqués,
+            l&apos;électronique,les logiciels embarqués et les microcontrôleurs, je
+            suis constamment à la recherche de nouveaux défis pour approfondir
+            mes compétences et contribuer à des projets innovants.
           </p>
         </div>
 
@@ -145,7 +145,7 @@ export const Hero = () => {
               Développeur React / Next.js
             </h3>
             <p className="text-gray-400 text-sm mt-1">
-              4 ans d'expérience React / Next.js C / C++
+              4 ans d&apos;expérience React / Next.js C / C++
             </p>
           </div>
         </div>
