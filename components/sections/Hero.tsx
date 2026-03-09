@@ -85,7 +85,7 @@ export const Hero = () => {
             src="/pdp1.png"
             alt="Marzouk"
             fill
-            className="object-cover transition-transform duration-700 opacity-100 backdrop-contrast-150 brightness-110"
+            className="object-cover transition-transform duration-700 opacity-100  brightness-110"
           />
           <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-md border border-white/10 p-3 rounded-2xl flex items-center justify-between">
             <span className="text-sm font-bold text-white">Marzouk.M</span>
