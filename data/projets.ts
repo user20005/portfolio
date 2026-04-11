@@ -4,6 +4,7 @@ export interface ProgressionStep {
   title: string;
   description: string;
 }
+
 export interface Project {
   id: string;
   title: string;
@@ -29,10 +30,19 @@ export interface Project {
 export const projects: Project[] = [
   // --- PROJETS WEB  ---
   {
-    id: 'robot',
-    title: 'SAE ROBOT ESP32 WIFI',
+    id: 'Speedfix',
+    title: 'Speedfix - Réparation de Téléphones',
     category: 'WEB',
-    context: 'Projet universitaire',
+    context: 'Entreprise',
+    description: "Service de réparation de téléphones portables.",
+    image: '/speedfix.webp',
+    tags: ['Réparation', 'Service Client'],
+    links: { demo: 'https://speedfix.shop' }
+  },{
+    id: 'robot',
+    title: 'ROBOT ESP32 WIFI',
+    category: 'WEB',
+    context: 'Projet Personnel',
     description: "Interface de contrôle d'un robot via une application web(WEBSOCKET).",
     image: '/robot/esp32.jpeg',
     tags: ['C++', 'JavaScript', 'WebSocket'],
@@ -42,9 +52,9 @@ export const projects: Project[] = [
     id: 'station-meteo',
     title: 'Station Météo Qtcreator',
     category: 'WEB',
-    context: 'Projet universitaire',
+    context: 'Projet Club Informatique',
     description: "Application de visualisation des données d'une station météo.",
-    image: '',
+    image: '/station_meteo.jpg',
     tags: ['C++', ' Qt', 'json'],
     links: { github: 'https://github.com/user20005/station-meteo' }
   },{

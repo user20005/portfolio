@@ -18,7 +18,6 @@ export const CV = () => {
   const tabs = [
     { id: 'experience', label: 'Expérience', icon: <path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /> },
     { id: 'education', label: 'Formation', icon: <path d="M12 14l9-5-9-5-9 5 9 5z" /> },
-    { id: 'certifs', label: 'Certifications', icon: <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /> },
   ];
 
   return (
@@ -104,22 +103,6 @@ export const CV = () => {
                   subtitle="Lycée Le Corbusier"
                   date="2021 - 2023"
                   desc="Option Systèmes d'Information et Numérique.Bases en programmation et réseaux."
-                />
-              </div>
-            )}
-
-            {/* CONTENU : CERTIFICATIONS */}
-            {activeTab === 'certifs' && (
-              <div className="tab-content grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <MiniCard 
-                  title="Meta Front-End Developer"
-                  issuer="W3Schools"
-                  date="2021"
-                />
-                <MiniCard 
-                  title="Cybersecurity & Cloud"
-                  issuer="Coursera"
-                  date="2022"
                 />
               </div>
             )}
